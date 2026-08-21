@@ -1,0 +1,52 @@
+[
+  {
+    "id": "breeze",
+    "name": "Breeze",
+    "price": 3,
+    "currency": "GBP",
+    "color": "#7DD3FC",
+    "description": "Light sky blue rank",
+    "hex": "#7DD3FC",
+    "featured": true
+  },
+  {
+    "id": "sunset",
+    "name": "Sunset",
+    "price": 5,
+    "currency": "GBP",
+    "color": "#FB7185",
+    "description": "Warm coral rank",
+    "hex": "#FB7185",
+    "featured": false
+  },
+  {
+    "id": "tropical",
+    "name": "Tropical",
+    "price": 10,
+    "currency": "GBP",
+    "color": "#14B8A6",
+    "description": "Tropical teal rank",
+    "hex": "#14B8A6",
+    "featured": false
+  },
+  {
+    "id": "oasis",
+    "name": "Oasis",
+    "price": 15,
+    "currency": "GBP",
+    "color": "#22C55E",
+    "description": "Palm green rank",
+    "hex": "#22C55E",
+    "featured": false
+  },
+  {
+    "id": "paradise",
+    "name": "Paradise",
+    "price": 25,
+    "currency": "GBP",
+    "color": "#FBBF24",
+    "description": "Golden yellow rank",
+    "hex": "#FBBF24",
+    "featured": true
+  }
+]
