@@ -1,52 +1,50 @@
 [
   {
-    "id": "breeze",
-    "name": "Breeze",
-    "price": 3,
-    "currency": "GBP",
-    "color": "#7DD3FC",
-    "description": "Light sky blue rank",
-    "hex": "#7DD3FC",
-    "featured": true
+    "id": "drifter",
+    "name": "Drifter Rank",
+    "category": "Ranks",
+    "price": 9.99,
+    "icon": "\u25c6",
+    "description": "A starter rank with exclusive in-game perks."
   },
   {
-    "id": "sunset",
-    "name": "Sunset",
-    "price": 5,
-    "currency": "GBP",
-    "color": "#FB7185",
-    "description": "Warm coral rank",
-    "hex": "#FB7185",
-    "featured": false
+    "id": "voyager",
+    "name": "Voyager Rank",
+    "category": "Ranks",
+    "price": 19.99,
+    "icon": "\u2726",
+    "description": "More perks, more commands and a stronger status."
   },
   {
-    "id": "tropical",
-    "name": "Tropical",
-    "price": 10,
-    "currency": "GBP",
-    "color": "#14B8A6",
-    "description": "Tropical teal rank",
-    "hex": "#14B8A6",
-    "featured": false
+    "id": "overdrive",
+    "name": "Overdrive Rank",
+    "category": "Ranks",
+    "price": 34.99,
+    "icon": "\u26a1",
+    "description": "A premium rank for players who want the full experience."
   },
   {
-    "id": "oasis",
-    "name": "Oasis",
-    "price": 15,
-    "currency": "GBP",
-    "color": "#22C55E",
-    "description": "Palm green rank",
-    "hex": "#22C55E",
-    "featured": false
+    "id": "common-key",
+    "name": "Common Crate Key",
+    "category": "Crate Keys",
+    "price": 2.99,
+    "icon": "\ud83d\udd11",
+    "description": "Open a crate for a chance at useful rewards."
   },
   {
-    "id": "paradise",
-    "name": "Paradise",
-    "price": 25,
-    "currency": "GBP",
-    "color": "#FBBF24",
-    "description": "Golden yellow rank",
-    "hex": "#FBBF24",
-    "featured": true
+    "id": "rare-key",
+    "name": "Rare Crate Key",
+    "category": "Crate Keys",
+    "price": 5.99,
+    "icon": "\ud83d\udc8e",
+    "description": "A higher-tier key with better potential rewards."
+  },
+  {
+    "id": "legendary-key",
+    "name": "Legendary Crate Key",
+    "category": "Crate Keys",
+    "price": 9.99,
+    "icon": "\u2605",
+    "description": "The premium key for your best crate rewards."
   }
 ]
