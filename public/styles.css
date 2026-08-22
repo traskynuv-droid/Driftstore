@@ -15,3 +15,61 @@ footer{border-top:1px solid var(--line);padding:40px max(24px,calc((100vw - var(
 .cart-panel{position:fixed;right:0;top:0;height:100vh;width:min(410px,92vw);background:#0b0f15;border-left:1px solid var(--line);z-index:40;padding:25px;transform:translateX(100%);transition:.25s;overflow:auto}.cart-panel.open{transform:translateX(0)}.cart-head{display:flex;justify-content:space-between;align-items:center}.cart-head button{font-size:30px;background:none;border:0;color:white;cursor:pointer}.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:30;opacity:0;pointer-events:none;transition:.2s}.overlay.open{opacity:1;pointer-events:auto}.cart-item{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--line)}.cart-item>div:nth-child(2){flex:1}.cart-item small{color:var(--muted)}.remove{background:none;border:0;color:#ff7884;cursor:pointer}.cart-total{display:flex;justify-content:space-between;padding:22px 0;font-size:18px}.full{width:100%}.tiny{font-size:11px;color:var(--muted);line-height:1.5}
 @media(max-width:800px){.nav{padding:0 16px}.nav nav{display:none}.hero{padding-top:55px;flex-direction:column;align-items:flex-start}.hero-card{width:100%;min-height:220px}.product-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.section-heading{align-items:flex-start;flex-direction:column}.filters{justify-content:flex-start}}
 @media(max-width:520px){.product-grid{grid-template-columns:1fr}.hero h1{letter-spacing:-2px}.hero p{font-size:16px}.footer-links{flex-direction:column}}
+/* DRIFT BLUE THEME */
+
+:root {
+    --accent: #19d9ff;
+    --accent-light: #67e8ff;
+    --accent-dark: #008cff;
+}
+
+/* Replace common purple colors */
+.eyebrow,
+.section-label,
+.category-label {
+    color: var(--accent);
+}
+
+button,
+.button,
+.btn,
+.primary-button {
+    background: var(--accent);
+    color: #061018;
+}
+
+button:hover,
+.button:hover,
+.btn:hover,
+.primary-button:hover {
+    background: var(--accent-light);
+}
+
+.category.active,
+.filter.active,
+.tab.active {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.price,
+.accent,
+.highlight {
+    color: var(--accent);
+}
+
+/* New Drift logo */
+.brand-logo {
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Make the header logo fit nicely on phones */
+@media (max-width: 600px) {
+    .brand-logo {
+        width: 64px;
+        height: 64px;
+    }
+}
