@@ -1,107 +1,69 @@
-const CONFIG = {
-  storeName: "DriftStore",
-  discord: "https://discord.com/",
-  currency: "$"
-};
+const cart = [];
 
-let products = [];
-let cart = [];
-
-const $ = (s) => document.querySelector(s);
-
-async function loadProducts() {
-  try {
-    const res = await fetch("products.json", {cache: "no-store"});
-    products = await res.json();
-  } catch (e) {
-    console.error("Could not load products.json", e);
-    products = [];
-  }
-  renderFilters();
-  renderProducts("All");
-  renderCart();
-}
-
-function renderFilters() {
-  const categories = ["All", ...new Set(products.map(p => p.category))];
-  $("#filters").innerHTML = categories.map((c,i) =>
-    `<button class="filter ${i===0?"active":""}" data-category="${escapeHtml(c)}">${escapeHtml(c)}</button>`
-  ).join("");
-  document.querySelectorAll(".filter").forEach(btn => btn.addEventListener("click", () => {
-    document.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    renderProducts(btn.dataset.category);
-  }));
-}
-
-function renderProducts(category) {
-  const list = category === "All" ? products : products.filter(p => p.category === category);
-  $("#productGrid").innerHTML = list.map(p => `
-    <article class="product">
-      <div class="product-art">${escapeHtml(p.icon || "◆")}</div>
-      <span class="tag">${escapeHtml(p.category)}</span>
-      <h3>${escapeHtml(p.name)}</h3>
-      <p>${escapeHtml(p.description)}</p>
-      <div class="product-bottom">
-        <span class="price">${CONFIG.currency}${Number(p.price).toFixed(2)}</span>
-        <button class="buy" onclick="addToCart('${p.id}')">Add to cart</button>
-      </div>
-    </article>
-  `).join("");
-}
-
-function addToCart(id) {
-  const p = products.find(x => x.id === id);
-  if (!p) return;
-  cart.push(p);
-  renderCart();
-  openCart();
-}
-
-function removeFromCart(index) {
-  cart.splice(index,1);
-  renderCart();
-}
+const count = document.getElementById("cartCount");
+const panel = document.getElementById("cartPanel");
+const items = document.getElementById("cartItems");
+const total = document.getElementById("cartTotal");
 
 function renderCart() {
-  $("#cartCount").textContent = cart.length;
+  count.textContent = cart.length;
+
   if (!cart.length) {
-    $("#cartItems").innerHTML = `<p class="tiny">Your cart is empty.</p>`;
-  } else {
-    $("#cartItems").innerHTML = cart.map((p,i) => `
-      <div class="cart-item">
-        <div>${escapeHtml(p.icon || "◆")}</div>
-        <div><strong>${escapeHtml(p.name)}</strong><br><small>${CONFIG.currency}${Number(p.price).toFixed(2)}</small></div>
-        <button class="remove" onclick="removeFromCart(${i})">Remove</button>
-      </div>
-    `).join("");
+    items.textContent = "Your cart is empty.";
+    total.textContent = "$0.00";
+    return;
   }
-  const total = cart.reduce((sum,p) => sum + Number(p.price), 0);
-  $("#cartTotal").textContent = CONFIG.currency + total.toFixed(2);
+
+  items.innerHTML = cart.map((item, i) =>
+    `<div class="cart-row">
+      <span>${item.name}</span>
+      <span>$${item.price.toFixed(2)} <button type="button" data-remove="${i}" style="margin-left:8px;background:none;border:0;color:#16b9ff;cursor:pointer">Remove</button></span>
+    </div>`
+  ).join("");
+
+  const sum = cart.reduce((n, item) => n + item.price, 0);
+  total.textContent = `$${sum.toFixed(2)}`;
+
+  items.querySelectorAll("[data-remove]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      cart.splice(Number(btn.dataset.remove), 1);
+      renderCart();
+    });
+  });
 }
 
-function openCart() {
-  $("#cartPanel").classList.add("open");
-  $("#overlay").classList.add("open");
-  $("#cartPanel").setAttribute("aria-hidden","false");
-}
-function closeCart() {
-  $("#cartPanel").classList.remove("open");
-  $("#overlay").classList.remove("open");
-  $("#cartPanel").setAttribute("aria-hidden","true");
-}
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-$("#storeName").textContent = CONFIG.storeName;
-document.title = CONFIG.storeName + " — Minecraft Store";
-$("#discordLink").href = CONFIG.discord;
-$("#cartButton").addEventListener("click", openCart);
-$("#closeCart").addEventListener("click", closeCart);
-$("#overlay").addEventListener("click", closeCart);
-$("#checkoutButton").addEventListener("click", () => {
-  alert("Demo checkout. Connect your payment provider before accepting real orders.");
+document.querySelectorAll(".add").forEach(button => {
+  button.addEventListener("click", () => {
+    cart.push({
+      name: button.dataset.rank,
+      price: Number(button.dataset.price)
+    });
+    renderCart();
+    panel.classList.add("open");
+    panel.setAttribute("aria-hidden", "false");
+  });
 });
 
-loadProducts();
+document.getElementById("cartButton").addEventListener("click", () => {
+  panel.classList.add("open");
+  panel.setAttribute("aria-hidden", "false");
+});
+
+document.getElementById("closeCart").addEventListener("click", () => {
+  panel.classList.remove("open");
+  panel.setAttribute("aria-hidden", "true");
+});
+
+panel.addEventListener("click", event => {
+  if (event.target === panel) {
+    panel.classList.remove("open");
+    panel.setAttribute("aria-hidden", "true");
+  }
+});
+
+document.getElementById("checkout").addEventListener("click", () => {
+  alert("Connect this button to your payment provider when you're ready.");
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderCart();
